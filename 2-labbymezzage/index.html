@@ -3,10 +3,19 @@
     <head>
         <meta charset="utf-8">
         <title>Labbymezzage</title>
+        <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        
-        <script src="js/message.js"></script>
-        <script src="js/MessageBoard.js"></script>
+        <div class="page">
+            <h1>Labbymezzage</h1>
+            <div class="message-wrap">
+                <div id="messages"></div>
+                <div id="message-count">Antal meddelanden: 0</div>
+                <textarea id="id_bodytext" name="bodytext"></textarea>
+                <input class="button" id="submit" type="submit" value="Skicka meddelande" />
+            </div>
+            <script src="js/message.js"></script>
+            <script src="js/MessageBoard.js"></script>
+        </div>
     </body>
 </html>

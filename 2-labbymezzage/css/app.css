@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+}
+
+html {
+    background-color: #F7F7F7;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #484c55;
+    line-height: 1.5em;
+}
+
+textarea {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: white;
+    font-family: inherit;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.75);
+    display: block;
+    font-size: 0.875em;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+    height: 8.3125em;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+    resize: vertical;
+}
+
+.button {
+    font-size: 16px;
+    padding: 0.5em 1.5em;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    *zoom: 1;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0B99C2', endColorstr='#FF064D61');
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0b99c2), color-stop(100%, #087392));
+    background: -webkit-linear-gradient(#0b99c2, #087392);
+    background: -moz-linear-gradient(#0b99c2, #087392);
+    background: -o-linear-gradient(#0b99c2, #087392);
+    background: linear-gradient(#0b99c2, #087392);
+    -webkit-box-shadow: #27c5f3 0 1px 0 inset;
+    -moz-box-shadow: #27c5f3 0 1px 0 inset;
+    box-shadow: #27c5f3 0 1px 0 inset;
+    border: 1px solid #07607a;
+    color: white;
+    text-shadow: #043645 0 -1px 0;
+}
+
+.button:hover {
+    background-color: #07607a;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0a86aa), color-stop(100%, #07607a));
+    background: -webkit-linear-gradient(#0a86aa, #07607a);
+    background: -moz-linear-gradient(#0a86aa, #07607a);
+    background: -o-linear-gradient(#0a86aa, #07607a);
+    background: linear-gradient(#0a86aa, #07607a);
+    text-decoration: none;
+}
+.button:active {
+    -webkit-box-shadow: #06546b 0 1px 2px inset;
+    -moz-box-shadow: #06546b 0 1px 2px inset;
+    box-shadow: #06546b 0 1px 2px inset;
+}
+.button.disabled, .button[disabled] {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    background: #087392;
+    cursor: default;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.button::-moz-focus-inner {
+    padding: 0 !important;
+    margin: -1px !important;
+}
+.button:focus {
+    background-color: #07607a;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0a86aa), color-stop(100%, #07607a));
+    background: -webkit-linear-gradient(#0a86aa, #07607a);
+    background: -moz-linear-gradient(#0a86aa, #07607a);
+    background: -o-linear-gradient(#0a86aa, #07607a);
+    background: linear-gradient(#0a86aa, #07607a);
+}
+.page {
+    width: 640px;
+    margin: auto;
+}
+
+.message-wrap {
+    width: 100%;
+    background: white;
+    border: 1px solid #cccccc;
+    padding: 10px;
+}
+
+#messages .message p {
+    margin: 0;
+}
+
+#messages .message .time-sent {
+    display: inline;
+    text-align:  right;
+}
+
+#messages .message {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0B99C2', endColorstr='#FF064D61');
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0b99c2), color-stop(100%, #087392));
+    background: -webkit-linear-gradient(#0b99c2, #087392);
+    background: -moz-linear-gradient(#0b99c2, #087392);
+    background: -o-linear-gradient(#0b99c2, #087392);
+    background: linear-gradient(#0b99c2, #087392);
+    -webkit-box-shadow: #27c5f3 0 1px 0 inset;
+    -moz-box-shadow: #27c5f3 0 1px 0 inset;
+    box-shadow: #27c5f3 0 1px 0 inset;
+    border: 1px solid #07607a;
+    color: white;
+    text-shadow: #043645 0 -1px 0;
+    margin-bottom: 5px;
+    padding: 10px;
+}
