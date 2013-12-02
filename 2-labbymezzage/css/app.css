@@ -9,6 +9,10 @@ html {
     line-height: 1.5em;
 }
 
+h1 {
+    text-transform: uppercase;
+}
+
 textarea {
     -webkit-appearance: none;
     -webkit-border-radius: 0;
@@ -32,6 +36,7 @@ textarea {
     -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
     resize: vertical;
+    outline: none;
 }
 
 .button {
@@ -135,4 +140,33 @@ textarea {
     text-shadow: #043645 0 -1px 0;
     margin-bottom: 5px;
     padding: 10px;
+}
+
+#message-count {
+    float: right;
+    font-size: 14px;
+    margin: 10px;
+}
+
+
+.delete-icon {
+    background: url("delete.png");
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: right;
+}
+
+.time-icon {
+    background: url("time.png");
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: right;
+}
+
+.time-sent {
+    font-size: 11px;
+    margin-top: -10px;
+    float: right;
 }
