@@ -23,6 +23,15 @@ var MessageBoard = {
 
         // Set focus on the textarea when the page is done rendering.
         textarea.focus();
+
+        // Check if keyCode is 13 (enter) and the shiftKey is false.
+        // If so, call the addMessage function.
+        textarea.onkeydown = function(e) {
+            if (e.keyCode === 13 && e.shiftKey === false) {
+                MessageBoard.addMessage();
+                return false;
+            }
+        };
     },
 
     // Function to add a message to the messages array.
