@@ -77,11 +77,17 @@ var MessageBoard = {
             textarea = document.querySelector("#id_bodytext"),
             text = document.createElement("p"),
             messageDiv = document.createElement("div"),
-            timeSent = document.createElement("span");
+            timeSent = document.createElement("span"),
+            deleteButton = document.createElement("a"),
+            timeButton = document.createElement("a");
 
         // Set some attritubutes to those elements.
         messageDiv.setAttribute("class", "message");
         timeSent.setAttribute("class", "time-sent");
+        timeButton.setAttribute("href", "#");
+        timeButton.setAttribute("class", "time-icon");
+        deleteButton.setAttribute("href", "#");
+        deleteButton.setAttribute("class", "delete-icon");
 
         // Get the html text from that particular array element 
         // and add it inside the text element.
@@ -90,8 +96,38 @@ var MessageBoard = {
 
         // Append all the elements.
         div.appendChild(messageDiv);
+        messageDiv.appendChild(deleteButton);
+        messageDiv.appendChild(timeButton);
         messageDiv.appendChild(text);
         messageDiv.appendChild(timeSent);
+
+        // When user clicks on the delete button remove that 
+        // particular element from the array and then re-render
+        // all the messages.
+        deleteButton.onclick = function() {
+            if (window.confirm("Vill du verkligen radera meddelandet?")) {
+
+                self.messages.splice(messageID, 1);
+
+                div.innerHTML = "";
+
+                self.renderMessages();
+
+                textarea.focus();
+            }
+            return false;
+        };
+
+        // When user click on the time button alert the date and time
+        // and then focus the textarea once again.
+        timeButton.onclick = function() {
+
+            alert(self.messages[messageID].getDateText());
+
+            textarea.focus();
+
+            return false;
+        };
     }
 };
 
