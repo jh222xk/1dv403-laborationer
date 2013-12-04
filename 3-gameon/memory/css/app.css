@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+}
+
+html {
+    background-color: #FFFFFF;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #484c55;
+    line-height: 1.5em;
+}
+
+.page {
+    width: 640px;
+    margin: auto;
+}
+
+.memory-wrap {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #cccccc;
+    padding: 10px;
+}
