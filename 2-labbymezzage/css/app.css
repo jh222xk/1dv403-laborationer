@@ -111,6 +111,12 @@ textarea {
     padding: 10px;
 }
 
+#messages {
+    overflow: auto;
+    max-height: 700px;
+    word-wrap: break-word;
+}
+
 #messages .message p {
     margin: 0;
 }
