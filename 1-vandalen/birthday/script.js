@@ -18,7 +18,9 @@ window.onload = function(){
 		date.setDate(date.getDate() + 1);
 
 		// Set the year to the current year (2013).
-		date.setFullYear(year);
+		if (date < dateNow) {
+			date.setFullYear(year + 1);
+		}
 
 		// The diffrence in ms.
 		var difference = date.getTime() - dateNow.getTime();
