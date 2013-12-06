@@ -19,4 +19,11 @@ html {
     background: #FFFFFF;
     border: 1px solid #cccccc;
     padding: 10px;
+    text-align: center;
+}
+
+.mem-col {
+    display: inline;
+    padding: 10px;
+
 }
