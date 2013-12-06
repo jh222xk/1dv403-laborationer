@@ -18,6 +18,9 @@ var Memory = {
         this.random = RandomGenerator.getPictureArray(rows, cols);
         var wrapperElement = document.querySelector(".memory-wrap");
         var imageLink = document.getElementsByTagName("a");
+        this.gameInfoEl = document.createElement("div");
+        this.completedCardsEl = document.createElement("div");
+        this.gameInfoEl.setAttribute("id", "game-info");
 
         // Iterate through the number of rows, create it and append it.
         for (var row = rows - 1; row >= 0; row--) {
@@ -46,6 +49,11 @@ var Memory = {
             }
         }
 
+        // Add the number of completed cards to the document.
+        this.completedCardsEl.innerHTML = 'Antal rätt: ' + this.completedCards;
+        wrapperElement.appendChild(this.gameInfoEl);
+        this.gameInfoEl.appendChild(this.completedCardsEl);
+
         // Iterate through all the anchortags on the page
         // and when the user clicks on an image call the
         // turnBrick function.
@@ -63,7 +71,7 @@ var Memory = {
         if (this.brickOne !== null && this.brickTwo !== null) {
             return;
         }
-        console.log(this);
+
         var activeCard;
         var img = card.querySelector("img");
 
@@ -84,6 +92,7 @@ var Memory = {
     checkCards: function () {
         var self = this;
 
+        // Increase number of tries by one.
         this.numOfTries += 1;
 
         // Check the sources is the same.
@@ -111,6 +120,17 @@ var Memory = {
                 self.brickOne = null;
                 self.brickTwo = null;
             }, 1000);
+        }
+
+        // Update the number of completed cards.
+        this.completedCardsEl.innerHTML = 'Antal rätt: ' + this.completedCards;
+
+        // Check if the number of completed cards is the same as the number of cards
+        // Divided by two because there are two of the same card.
+        if (this.completedCards === (this.random.length / 2)) {
+            var completedGameEl = document.createElement("p");
+            completedGameEl.innerHTML = "Grattis! Du klarade det på " + this.numOfTries + " försök.";
+            this.gameInfoEl.appendChild(completedGameEl);
         }
     },
 };
