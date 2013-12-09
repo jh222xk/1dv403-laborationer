@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulär</title>
+    <link rel="stylesheet" href="stylesheets/app.css" />
+</head>
+<body>
+    <div class="row">
+        <div class="large-12 columns">
+            <h1>Fyll i din betalningsplan</h1>
+        </div>
+    </div>
+
+    <form method="post" action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php">
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="firstname">Förnamn</label>
+                <input type="text" name="firstname" id="firstname" placeholder="Kalle" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="lastname">Efternamn</label>
+                <input type="text" name="lastname" id="lastname" placeholder="Karlsson" />
+            </div> 
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="zipcode">Postnummer</label>
+                <input type="text" name="zipcode" id="zipcode" placeholder="123 45" />
+            </div> 
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="email">E-post</label>
+                <input type="text" name="email" id="email" placeholder="kalle@gmail.com" />
+            </div> 
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="priceplan">Prismodell</label>
+                <select name="priceplan" id="priceplan">
+                    <option value="low">Låg</option>
+                    <option value="between">Mellan</option>
+                    <option value="high">Hög</option>
+                </select>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <input type="submit" class="button radius" value="Genomför köp" />
+            </div>
+        </div>
+    </form>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

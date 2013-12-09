@@ -1,0 +1,6 @@
+/bower_components/*
+/.sass-cache/*
+*.DS_Store
+*.bowerrc
+bower.json
+config.rb
