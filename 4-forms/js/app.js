@@ -3,12 +3,13 @@
 var Validator = {
     init: function () {
         var form = document.querySelector("#formVal");
+
         Validator.validate(form);
     },
 
     // Our regex
     filters: {
-        required: /./,
+        required: /\S/,
         email: /^(?!\.)(\w|-|\.){1,64}(?!\.)@(?!\.)[-.a-zåäö0-9]{4,253}$/,
         zipcode: /^(SE)? ?(\d\d\d)( |\-)?(\d\d)$/,
     },
@@ -43,33 +44,60 @@ var Validator = {
     // Function for checking if the required field is valid.
     checkRequired: function () {
         if (!this.value.match(Validator.filters.required)) {
-            console.log("Error required");
+            Validator.presentError(this, "Detta fält måste fyllas i.");
         }
         else {
-            console.log("Valid required");
+            Validator.removeError(this);
         }
     },
 
     // Function for checking if the e-mail is valid.
     checkEmail: function () {
         if (!this.value.match(Validator.filters.email)) {
-            console.log("Error email");
+            Validator.presentError(this, "Fyll i en giltig e-postadress.");
         }
         else {
-            console.log("Valid email");
+            Validator.removeError(this);
         }
     },
 
     // Function for checking if a swedish zipcode is valid.
     checkZipcode: function () {
         if (!this.value.match(Validator.filters.zipcode)) {
-            console.log("Error zipcode");
+            Validator.presentError(this, "Fyll i ett giltigt postnummer.");
         }
         else {
             // Replace the value to XXXXX.
             this.value = this.value.replace(/[(SE) \(\)-]/g, "");
-            console.log(this.value);
-            console.log("Valid zipcode");
+            Validator.removeError(this);
+        }
+    },
+
+    // Function for presenting an error.
+    presentError: function (input, msg) {
+        var errorEl, errorMsg, label;
+
+        if(!input.nextElementSibling) {
+            label = input.previousElementSibling;
+            label.setAttribute("class", "error");
+            input.setAttribute("class", "error");
+            errorEl = document.createElement("small");
+            input.parentNode.appendChild(errorEl);
+            errorMsg = document.createTextNode(msg);
+            errorEl.setAttribute("class", "error");
+            errorEl.appendChild(errorMsg);
+        }
+    },
+
+    // Function to remove the error divs, i.e add the class valid instead.
+    removeError: function (input) {
+        var label;
+
+        label = input.previousElementSibling;
+        label.setAttribute("class", "valid");
+        input.setAttribute("class", "valid");
+        if (input.nextElementSibling) {
+            input.parentNode.removeChild(input.nextElementSibling);
         }
     }
 
