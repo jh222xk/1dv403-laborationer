@@ -36,9 +36,25 @@ var Validator = {
             else if (typeName === "submit") {
                 input.onclick = function (event) {
                     event.preventDefault();
+                    Validator.checkIfValid();
                 };
             }
         }
+    },
+
+    // Function for checking if all the inputs are valid,
+    // if they are valid call the showPopup function.
+    checkIfValid: function () {
+        var form, input, i;
+
+        form = document.querySelector("#formVal");
+        for (i = 0; i < form.elements.length; i++) {
+            input = form.elements[i];
+            if (input.classList.contains("error") || input.classList.contains("required")) {
+                return false;
+            }
+        }
+        Validator.showPopup();
     },
 
     // Function for checking if the required field is valid.
@@ -99,6 +115,91 @@ var Validator = {
         if (input.nextElementSibling) {
             input.parentNode.removeChild(input.nextElementSibling);
         }
+    },
+
+    // Function for show the popup window.
+    showPopup: function () {
+        var inputValue, inputName, popup, popupInfo,
+            cancelLink, proceedLink, form, inputInfo, i;
+
+        popup = document.querySelector("#popup");
+        popupInfo = document.querySelector("#popup .info");
+        cancelLink = popupInfo.querySelector("#cancel");
+        proceedLink = popupInfo.querySelector("#proceed");
+        form = document.querySelector('#formVal');
+        inputInfo = document.querySelector("#popup .info .input-info");
+
+        // While the input-info div has child nodes remove them.
+        while (inputInfo.hasChildNodes()) {
+            inputInfo.removeChild(inputInfo.firstChild);
+        }
+
+        // Show the popup.
+        popup.setAttribute("class", "show");
+
+        for (i = 0; i < form.elements.length; i++) {
+            // Get the value from the form element.
+            inputValue = form.elements[i].value;
+            // If the element type is'nt submit, push some data.
+            if (form.elements[i].type !== "submit") {
+                // Get the name within the label.
+                inputName = form.querySelector('label[for="' + form.elements[i].id + '"]');
+                // Call the addData function with our values.
+                Validator.addData(inputName.childNodes[0].nodeValue, inputValue);
+            }
+        }
+
+        // If the proceed link is clicked, send the form AWAY!
+        proceedLink.onclick = function (event) {
+            event.preventDefault();
+            form.submit();
+        };
+
+        // If ESC is pressed, hide the popup!
+        document.onkeydown = function(e) {
+            if (e.keyCode === 27) {
+                Validator.hidePopup();
+            }
+        };
+
+        // If the cancel link is clicked, hide the popup!
+        cancelLink.onclick = Validator.hidePopup;
+        return false;
+    },
+
+    // Function to add the data to the popup window.
+    addData: function (inputName, inputValue) {
+        var row, inputInfo, inputNameEl, inputValueEl,
+            inputNameText, inputValueText;
+
+        // Create some elements.
+        row = document.createElement("div");
+        inputInfo = document.querySelector("#popup .info .input-info");
+        inputNameEl = document.createElement("span");
+        inputValueEl = document.createElement("span");
+        inputNameText = document.createTextNode(inputName + ": ");
+        inputValueText = document.createTextNode(inputValue);
+
+        // Set some attributes.
+        inputValueEl.setAttribute("class", "right");
+        inputNameEl.setAttribute("class", "bold");
+        row.setAttribute("class", "input-info-row");
+
+        // Append it.
+        inputInfo.appendChild(row);
+        row.appendChild(inputNameEl);
+        row.appendChild(inputValueEl);
+        inputNameEl.appendChild(inputNameText);
+        inputValueEl.appendChild(inputValueText);
+    },
+
+    // Function for hiding the popup window.
+    hidePopup: function () {
+        var popup;
+
+        popup = document.querySelector("#popup");
+        popup.setAttribute("class", "hide");
+        return false;
     }
 
 };
