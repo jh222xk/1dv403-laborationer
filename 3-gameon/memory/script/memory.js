@@ -78,25 +78,30 @@ var Memory = {
         // Set the source of the image to what the card id is.
         img.setAttribute("src", "pics/"+ this.random[card.id] + ".png");
 
-        if (!this.brickOne) {
+        if (!this.brickOne && !img.classList.contains("completed")) {
             img.classList.toggle("active-card");
             this.brickOne = img;
         }
-        else if (!this.brickTwo) {
+        else if (!this.brickTwo && !img.classList.contains("completed")) {
             img.classList.toggle("active-card");
-            this.brickTwo = img;
-            this.checkCards();
+            if (this.brickOne.id !== img.id) {
+                this.brickTwo = img;
+                this.checkCards();
+            }
         }
+       
     },
 
     checkCards: function () {
         var self = this;
+        var brickOneId = this.brickOne.getAttribute("id");
+        var brickTwoId = this.brickTwo.getAttribute("id");
 
         // Increase number of tries by one.
         this.numOfTries += 1;
 
         // Check the sources is the same.
-        if (this.brickOne.getAttribute("src") === this.brickTwo.getAttribute("src")) {
+        if (this.brickOne.getAttribute("src") === this.brickTwo.getAttribute("src") && brickOneId !== brickTwoId) {
             // Add the class completed to those bricks.
             this.brickOne.setAttribute("class", "completed");
             this.brickTwo.setAttribute("class", "completed");
