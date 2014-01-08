@@ -1,7 +1,9 @@
 (function ($) {
     "use strict";
-    PWD.RSS = function () {
+    PWD.RSS = function (url) {
         PWD.Window.call(this, "RSS", "rss-16", 400, 600);
+
+        this.url = url;
 
         this.fetchData();
     };
@@ -16,9 +18,9 @@
     	var self = this;
 
         // Set our status.
-    	this.setFooterStatus("Läser in RSS flöden...");
-
-    	url = "http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url=http://www.dn.se/m/rss/senaste-nytt";
+        this.setFooterStatus("Läser in RSS flöden...");
+        url = this.url;
+    	//url = "http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url=http://www.sweclockers.com/feeds/nyheter";
 
 		jqxhr = $.get(url, function(data) {
             // Set our content.
@@ -28,8 +30,10 @@
 			self.setWindowContent("Något gick fel!");
 		}).always(function() {
             // Always remove the status.
-			self.removeFooterStatus();
+	        self.removeFooterStatus();
 		});
+
+
 	};
 
 })(jQuery);

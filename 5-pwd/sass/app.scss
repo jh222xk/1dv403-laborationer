@@ -27,6 +27,7 @@ html, body {
     height: 100%;
     margin: 0;
     position: fixed;
+    overflow: hidden;
 }
 
 .start-menu {
@@ -40,7 +41,6 @@ html, body {
 }
 
 .window {
-    margin: 50px;
     @include border-radius(3px);
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: 300;
@@ -50,7 +50,9 @@ html, body {
     text-rendering: optimizeLegibility;
     line-height: 1.4;
     position: absolute;
-    z-index: 0;
+    width: 236px;
+    height: 300px;
+    
     .window-content {
         background: rgb(255, 255, 255);
         padding: $window-content-padding;
@@ -72,7 +74,6 @@ html, body {
         .rssFeed {
             font-size: 12px;
             .rss_title {
-
                 filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEDEDED', endColorstr='#FFBABABA');
                 background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(100%, lightgrey));
                 background: -webkit-linear-gradient(#ededed, lightgrey);
@@ -83,11 +84,7 @@ html, body {
                 -moz-box-shadow: white 0 1px 0 inset;
                 box-shadow: white 0 1px 0 inset;
                 border: 1px solid #c7c7c7;
-                -webkit-border-radius: 3px 3px 0 0;
-                -moz-border-radius: 3px 3px 0 0;
-                -ms-border-radius: 3px 3px 0 0;
-                -o-border-radius: 3px 3px 0 0;
-                border-radius: 3px 3px 0 0;
+                @include border-radius(3px 3px 0 0);
                 text-shadow: white 0 1px 0;
                 font-size: 12px;
                 font-weight: 700;
@@ -99,6 +96,11 @@ html, body {
             }
             p {
                 padding: 5px;
+            }
+            img {
+                max-width: 100%;
+                @include border-radius(3px);
+                border: 1px solid #c7c7c7;
             }
         }
     }

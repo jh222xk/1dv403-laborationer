@@ -72,6 +72,7 @@ html, body {
   height: 100%;
   margin: 0;
   position: fixed;
+  overflow: hidden;
 }
 
 .start-menu {
@@ -85,7 +86,6 @@ html, body {
 }
 
 .window {
-  margin: 50px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -99,7 +99,8 @@ html, body {
   text-rendering: optimizeLegibility;
   line-height: 1.4;
   position: absolute;
-  z-index: 0;
+  width: 236px;
+  height: 300px;
 }
 .window .window-content {
   background: white;
@@ -151,6 +152,15 @@ html, body {
 .window .window-content .rssFeed p {
   padding: 5px;
 }
+.window .window-content .rssFeed img {
+  max-width: 100%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+}
 
 .window-close {
   border: 1px solid #454545;
@@ -169,6 +179,21 @@ html, body {
 }
 .window-close a:hover {
   color: #BDBDBD;
+}
+
+.window-maximize, .window-restore {
+  border: 1px solid #454545;
+  float: right;
+  padding: 0 7px 2px 7px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  height: 23px;
+  width: 10px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .window-titlebar {
