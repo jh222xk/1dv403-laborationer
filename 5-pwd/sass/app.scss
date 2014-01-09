@@ -38,6 +38,7 @@ html, body {
     position: absolute;
     bottom: 0;
     border-top: 1px solid #454545;
+    z-index: 1000;
 }
 
 .window {
@@ -119,6 +120,17 @@ html, body {
             color: #BDBDBD;
         }
     }
+}
+
+.window-maximize, .window-restore {
+    border: 1px solid #454545;
+    float: right;
+    padding: 0 7px 2px 7px;
+    @include border-radius(3px);
+    height: 23px;
+    width: 10px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .window-titlebar {

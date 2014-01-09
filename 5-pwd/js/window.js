@@ -7,7 +7,6 @@
     PWD.Window = function (title, icon, width, height) {
         console.log(this);
         var self = this;
-        var rangeTop, rangeLeft, windowOffset, windowOffsetLeft;
 
         this.el = this.createWindow();
 
@@ -23,15 +22,119 @@
 
         this.setWindowIndex();
 
+        // Click event on the WINDOW element to set the
+        // z-index (focus).
         this.el.windowEl.on('click', function(event) {
             event.preventDefault();
             self.setWindowIndex();
         });
 
+        // Click event on the close link to close the window
+        // (and remove it from the DOM).
         this.el.windowCloseLink.on('click', function(event) {
             event.preventDefault();
             self.closeWindow();
         });
+
+        // Click event on the maximize element to maximize the window.
+        this.el.windowMaximizeEl.on('click', function(event) {
+            event.preventDefault();
+            self.maximizeWindow();
+        });
+
+        // Double click event to either maximize or restore.
+        this.el.windowEl.on('dblclick', function(event) {
+            event.preventDefault();
+            if ($(this).hasClass('maximized')) {
+                self.restoreWindow();
+            }
+            else {
+                self.maximizeWindow();
+            }
+            
+        });
+
+        // Click event on the restore element to bring it back.
+        this.el.windowRestoreEl.on('click', function(event) {
+            event.preventDefault();
+            self.restoreWindow();
+        });
+    };
+
+
+    // Function for maximizing the window.
+    PWD.Window.prototype.maximizeWindow = function() {
+        var height, width, $desktop, $startMenu;
+
+        $desktop = $('.desktop');
+        $startMenu = $('.start-menu');
+
+        // Save the window position.
+        this.saveWindowPos(this.el.windowEl);
+
+        height = $desktop.height() - $startMenu.height();
+
+        // Add values to the window.
+        this.el.windowEl.css({
+            left: 0,
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: $desktop.width(),
+            height: height
+        }).addClass('maximized');
+        // Add values to the content of the window.
+        this.el.windowContentEl.css({
+            width: $desktop.width() - 16,
+            height: height - $startMenu.height() - this.el.windowTitleEl.height() - this.el.windowFooterEl.height() + 11
+        });
+
+        // Hide the maximize element.
+        this.el.windowMaximizeEl.hide();
+        // Show the restore element instead.
+        this.el.windowRestoreEl.show();
+    };
+
+    // Function for restoring the window from the maximize state.
+    PWD.Window.prototype.restoreWindow = function() {
+        var el;
+
+        el = this.el.windowEl;
+
+        if (el.hasClass('maximized')) {
+            el.removeClass('maximized');
+        }
+
+        this.setWindowWidthHeight();
+
+        // Set the position to where it were before it got maximized.
+        el.css(el.data('old-position'));
+
+        // Hide the restore element.
+        this.el.windowRestoreEl.hide();
+        // Show the maximize element instead.
+        this.el.windowMaximizeEl.show();
+    };
+
+    // Function for getting the position of the window.
+    PWD.Window.prototype.getWindowPos = function(el) {
+        el.top = el.offset().top;
+        el.left = el.offset().left;
+
+        return el;
+    };
+
+    // Function for setting the position of the window.
+    PWD.Window.prototype.saveWindowPos = function(el) {
+        var windowPosition;
+
+        if (!el.data('old-position')) {
+            windowPosition = this.getWindowPos(el);
+            el.data('old-position', {
+                top: windowPosition.top,
+                left: windowPosition.left
+            });
+        }
     };
 
     // Function for setting the position of the window.
@@ -95,8 +198,9 @@
     // Function for creating the elements for the window.
     PWD.Window.prototype.createWindow = function() {
         var desktopEl, windowEl, windowTitleEl, windowTitleIcon,
-            windowCloseEl, windowCloseLink, windowContentEl,
-            windowTitleText, windowFooterEl;
+            windowCloseEl, windowMaximizeEl, windowRestoreEl,
+            windowCloseLink, windowContentEl, windowTitleText,
+            windowFooterEl;
 
             desktopEl = $('.desktop');
             windowEl = $('<div class="window" />');
@@ -104,11 +208,17 @@
             windowTitleIcon = $('<div class="window-icon" />').appendTo(windowTitleEl);
             windowTitleText = $('<span class="window-text" />').appendTo(windowTitleEl);
             windowCloseEl = $('<div class="window-close" />').appendTo(windowTitleEl);
+            windowMaximizeEl = $('<div class="window-maximize" />').appendTo(windowTitleEl);
+            windowRestoreEl = $('<div class="window-restore" />').appendTo(windowTitleEl);
             windowCloseLink = $('<a href="#" title="Stäng fönster">x</a>').appendTo(windowCloseEl);
+
             windowContentEl = $('<div class="window-content" />').appendTo(windowEl);
             windowFooterEl = $('<div class="window-footer" />').appendTo(windowEl);
             
             windowEl.appendTo(desktopEl);
+            
+            // Hide the restore element to begin with.
+            windowRestoreEl.hide();
 
             // Return 'em.
             return {
@@ -118,6 +228,8 @@
                 windowTitleIcon: windowTitleIcon,
                 windowTitleText: windowTitleText,
                 windowCloseLink: windowCloseLink,
+                windowMaximizeEl: windowMaximizeEl,
+                windowRestoreEl: windowRestoreEl,
                 windowContentEl: windowContentEl,
                 windowFooterEl: windowFooterEl
             }
