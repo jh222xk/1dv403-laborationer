@@ -262,20 +262,20 @@ html, body {
   background-image: url("../img/default-background.jpg");
 }
 
-.image-viewer-icon {
-  background-image: url("../img/app-icons/wallpapers.png");
-  width: 32px;
-  height: 32px;
-  margin: 10px;
-  display: inline-block;
-  cursor: pointer;
-}
-
 .image-viewer-16 {
   background-image: url("../img/app-icons/image-viewer-16.png");
   width: 16px;
   height: 16px;
   display: inline-block;
+}
+
+.image-viewer-32 {
+  background-image: url("../img/app-icons/image-viewer-32.png");
+  width: 32px;
+  height: 32px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .rss-16 {
@@ -292,4 +292,30 @@ html, body {
   margin: 10px;
   display: inline-block;
   cursor: pointer;
+}
+
+.memory-16 {
+  background-image: url("../img/app-icons/memory-16.png");
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.memory-32 {
+  background-image: url("../img/app-icons/memory-32.png");
+  width: 32px;
+  height: 32px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.memory-wrap {
+  padding: 10px;
+  text-align: center;
+}
+
+.mem-col {
+  display: inline;
+  padding: 10px;
 }

@@ -43,9 +43,9 @@
         });
 
         // Double click event to either maximize or restore.
-        this.el.windowEl.on('dblclick', function(event) {
+        this.el.windowTitleEl.on('dblclick', function(event) {
             event.preventDefault();
-            if ($(this).hasClass('maximized')) {
+            if (self.el.windowEl.hasClass('maximized')) {
                 self.restoreWindow();
             }
             else {
