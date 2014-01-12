@@ -110,7 +110,6 @@
         this.setWindowContent(wrapperElement);
 
         var imageLink = wrapperElement.querySelectorAll("a.memory-pic");
-        console.log(imageLink);
 
         // Iterate through all the anchortags on the page
         // and when the user clicks on an image call the

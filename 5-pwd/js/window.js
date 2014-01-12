@@ -22,9 +22,9 @@
 
         this.setWindowIndex();
 
-        // Click event on the WINDOW element to set the
-        // z-index (focus).
         this.el.windowEl.on('click', function(event) {
+            // Click event on the WINDOW element to set the
+            // z-index (focus).
             event.preventDefault();
             self.setWindowIndex();
         });
@@ -60,7 +60,6 @@
             self.restoreWindow();
         });
     };
-
 
     // Function for maximizing the window.
     PWD.Window.prototype.maximizeWindow = function() {
@@ -128,13 +127,11 @@
     PWD.Window.prototype.saveWindowPos = function(el) {
         var windowPosition;
 
-        if (!el.data('old-position')) {
-            windowPosition = this.getWindowPos(el);
-            el.data('old-position', {
-                top: windowPosition.top,
-                left: windowPosition.left
-            });
-        }
+        windowPosition = this.getWindowPos(el);
+        el.data('old-position', {
+            top: windowPosition.top,
+            left: windowPosition.left
+        });
     };
 
     // Function for setting the position of the window.
