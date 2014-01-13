@@ -1,8 +1,19 @@
 (function ($) {
     "use strict";
     PWD.ImageViewer = function (singleImage) {
-        PWD.Window.call(this, "Image Viewer", "image-viewer-16");
-        this.fetchImages();
+        if (singleImage) {
+            var img;
+            img = $("<img src='"+singleImage.URL+"' />");
+
+            PWD.Window.call(this, "ImageViewer > Visa Bild", "image-viewer-16", singleImage.width, singleImage.height);
+
+            this.setWindowContent(img);
+        }
+        else {
+            PWD.Window.call(this, "Image Viewer", "image-viewer-16");
+            this.fetchImages();
+        }
+        
     };
 
     // Inherit all the Window functions.
@@ -50,8 +61,17 @@
 
             img.on('click', function(event) {
                 event.preventDefault();
-                self.setImageAsBG(value);
+                self.openImage(value);
             });
+
+            img.on('mousedown', function(event) {
+                event.preventDefault();
+                if(event.button == 2) { 
+                    self.setImageAsBG(value);
+                    return false; 
+                }
+            });
+
         });
     };
 
@@ -77,12 +97,17 @@
         }
     };
 
+    PWD.ImageViewer.prototype.openImage = function(image) {
+        new PWD.ImageViewer(image);
+    };
+
     // Function for setting the "clicked" image as background.
     PWD.ImageViewer.prototype.setImageAsBG = function(image) {
         var desktopEl;
 
         desktopEl = $('.desktop');
         desktopEl.css("background-image", "url(" + image.URL + ")");
+        
     };
 
 })(jQuery);
