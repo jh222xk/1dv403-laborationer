@@ -3,14 +3,13 @@
     
     PWD.StartMenu = function () {
         var desktopEl, startMenuEl, imageviewerIcon,
-            rssIcon, rssIcon2, memoryIcon, messengerIcon;
+            rssIcon, memoryIcon, messengerIcon;
 
         desktopEl = $('.desktop');
         startMenuEl = ($('<div>', { class: 'start-menu' }).appendTo(desktopEl));
 
         imageviewerIcon = ($('<div>', { class: 'image-viewer-32' }).appendTo(startMenuEl));
         rssIcon = ($('<div>', { class: 'rss-32' }).appendTo(startMenuEl));
-        rssIcon2 = ($('<div>', { class: 'rss-32' }).appendTo(startMenuEl));
         memoryIcon = ($('<div>', { class: 'memory-32' }).appendTo(startMenuEl));
         messengerIcon = ($('<div>', { class: 'messenger-32' }).appendTo(startMenuEl));
 
@@ -19,11 +18,7 @@
         });
 
         rssIcon.on('click', function(event) {
-            new PWD.RSS("http://www.sweclockers.com/feeds/nyheter", 1000);
-        });
-
-        rssIcon2.on('click', function(event) {
-            new PWD.RSS("http://www.dn.se/m/rss/senaste-nytt", 10000);
+            new PWD.RSS("http://www.sweclockers.com/feeds/nyheter");
         });
 
         memoryIcon.on('click', function(event) {

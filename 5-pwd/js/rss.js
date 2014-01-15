@@ -164,7 +164,7 @@
                 self.setURL(url);
 
                 // And set a new interval.
-                self.updateData();
+                self.fetchData();
             });
         });
     };
