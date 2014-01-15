@@ -1,6 +1,8 @@
 (function ($) {
     "use strict";
     PWD.Memory = function (rows, cols) {
+        var self = this;
+
         PWD.Window.call(this, "Memory", "memory-16", 400, 400);
 
         this.rows = rows = typeof rows !== 'undefined' ? rows : 4;
@@ -17,10 +19,39 @@
         this.gameInfoEl.setAttribute("id", "game-info");
 
         this.startGame(rows, cols);
+
+        this.menu = this.addMenuToWindow();
+
+        this.menuEls = this.createMenuElements();
+
+        // On close, remove the ajax call and the interval.
+        this.menuEls.closeLink.on('click', function(event) {
+            event.preventDefault();
+            self.closeWindow();
+        });
     };
 
     // Inherit all the Window functions.
     inheritPrototype(PWD.Memory, PWD.Window);
+
+    // Function for creating the menu elements.
+    PWD.Memory.prototype.createMenuElements = function() {
+        var ul, li, lie, editUl, archiveUl,
+            $closeLink;
+
+        $closeLink = $('<li><a class="close" href="#">Stäng</a></li>');
+
+        ul = $('<ul class="top-level-ul"></ul>');
+        li = $('<li><a href="#">Arkiv</a></li>').appendTo(ul);
+        archiveUl = $('<ul class="archive-ul"></ul>').appendTo(li);
+        $closeLink.appendTo(archiveUl);
+
+        this.menu.windowMenuEl.append(ul);
+
+        return {
+            closeLink: $closeLink
+        }
+    };
 
     PWD.Memory.prototype.getPictureArray = function(rows, cols) {
         var numberOfImages = rows*cols;

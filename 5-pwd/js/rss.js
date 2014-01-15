@@ -114,7 +114,7 @@
                 var $optionEl = $("<option value='"+optionsArr[i]+"'>"+textArr[i]+"</option>").appendTo($selectEl);
             };
 
-            $h1 = $('<h1>Ändra Uppdateringsintervall</h1>');
+            $h1 = $('<h1>Ändra uppdateringsintervall</h1>');
 
             $h1.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
             $selectEl.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
