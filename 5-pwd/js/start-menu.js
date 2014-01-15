@@ -3,7 +3,7 @@
     
     PWD.StartMenu = function () {
         var desktopEl, startMenuEl, imageviewerIcon,
-            rssIcon, rssIcon2, memoryIcon;
+            rssIcon, rssIcon2, memoryIcon, messengerIcon;
 
         desktopEl = $('.desktop');
         startMenuEl = ($('<div>', { class: 'start-menu' }).appendTo(desktopEl));
@@ -12,6 +12,7 @@
         rssIcon = ($('<div>', { class: 'rss-32' }).appendTo(startMenuEl));
         rssIcon2 = ($('<div>', { class: 'rss-32' }).appendTo(startMenuEl));
         memoryIcon = ($('<div>', { class: 'memory-32' }).appendTo(startMenuEl));
+        messengerIcon = ($('<div>', { class: 'messenger-32' }).appendTo(startMenuEl));
 
         imageviewerIcon.on('click', function () {
             new PWD.ImageViewer();
@@ -26,7 +27,11 @@
         });
 
         memoryIcon.on('click', function(event) {
-            new PWD.Memory(4, 4);
+            new PWD.Memory(4, 2);
+        });
+
+        messengerIcon.on('click', function(event) {
+            new PWD.Messenger();
         });
 
 

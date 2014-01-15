@@ -3,6 +3,9 @@
     PWD.Memory = function (rows, cols) {
         PWD.Window.call(this, "Memory", "memory-16", 400, 400);
 
+        this.rows = rows = typeof rows !== 'undefined' ? rows : 4;
+        this.cols = cols = typeof cols !== 'undefined' ? cols : 4;
+
         this.random = this.getPictureArray(rows, cols);
         this.brickOne = null;
         this.brickTwo = null;
