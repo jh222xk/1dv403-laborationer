@@ -19,11 +19,11 @@
         });
 
         rssIcon.on('click', function(event) {
-            new PWD.RSS("http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url=http://www.sweclockers.com/feeds/nyheter");
+            new PWD.RSS("http://www.sweclockers.com/feeds/nyheter", 1000);
         });
 
         rssIcon2.on('click', function(event) {
-            new PWD.RSS("http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url=http://www.dn.se/m/rss/senaste-nytt");
+            new PWD.RSS("http://www.dn.se/m/rss/senaste-nytt", 10000);
         });
 
         memoryIcon.on('click', function(event) {

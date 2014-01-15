@@ -55,6 +55,55 @@ html, body {
     position: absolute;
     width: 236px;
     height: 300px;
+    .window-menu {
+        background: #6b6b6b;
+        height: 25px;
+        border-left: 1px solid #454545;
+        border-right: 1px solid #454545;
+        border-bottom: 1px solid #454545;
+        li {
+            display: inline-block;
+            margin: -5px 20px 0 15px;
+            list-style-type: none;
+            z-index: 1000;
+            width: auto;
+            padding-bottom: 5px;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            z-index: 1000;
+            width: auto;
+            ul {
+                display: none;
+                width: auto;
+                z-index: 1000;
+                li {
+                    padding: 7px;
+                    z-index: 1000;
+                    display: block;
+                    margin: 0;
+                }
+            }
+        }
+        ul li:hover > ul {
+            background: #6b6b6b;
+            display: block;
+            @include border-radius(0 0 3px 3px);
+            margin-top: 4px;
+            position: absolute;
+            z-index: 1000;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 14px;
+            color: white;
+            text-shadow: #292929 0 -1px 0;
+            font-weight: bold;
+        }
+    }
+    
     .window-content {
         background: rgb(255, 255, 255);
         padding: $window-content-padding;
@@ -317,6 +366,29 @@ textarea {
     outline: none;
 }
 
+input {
+    -webkit-appearance: none;
+    @include border-radius(0);
+    background-color: white;
+    font-family: inherit;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 0.875em;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+    width: 500px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+    resize: vertical;
+    outline: none;
+}
+
 .button {
     filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEDEDED', endColorstr='#FFBABABA');
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(100%, lightgrey));
@@ -357,10 +429,73 @@ textarea {
     margin-bottom: 5px;
 }
 
+.popup {
+    background: rgba(204, 204, 204, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    .popup-info {
+        width: 700px;
+        margin: 100px auto;
+        background-color: #fff;
+        padding: 15px;
+        text-align: center;
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+        .close {
+            position: absolute;
+            margin-top: 8px;
+            margin-right: 4px;
+            top: 0;
+            right: 0px;
+            @include border-radius(3px);
+            a {
+                filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEDEDED', endColorstr='#FFBABABA');
+                background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(100%, lightgrey));
+                background: -webkit-linear-gradient(#ededed, lightgrey);
+                background: -moz-linear-gradient(#ededed, lightgrey);
+                background: -o-linear-gradient(#ededed, lightgrey);
+                background: linear-gradient(#ededed, #d3d3d3);
+                -webkit-box-shadow: white 0 1px 0 inset;
+                -moz-box-shadow: white 0 1px 0 inset;
+                box-shadow: white 0 1px 0 inset;
+                border: 1px solid #c7c7c7;
+                @include border-radius(3px);
+                text-shadow: white 0 1px 0;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 0.5em 1em;
+                cursor: pointer;
+                color: #000;
+            }
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    }
+}
+
 .hide {
     display: none;
 }
 
 .show {
     display: block;
+}
+
+h1 {
+    font-size: 2.3125rem;
+    line-height: 1.4;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #222222;
+    text-rendering: optimizeLegibility;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
 }

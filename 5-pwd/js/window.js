@@ -238,6 +238,16 @@
         el.addClass('focused').css('z-index', ++zIndex);
     };
 
+    PWD.Window.prototype.addMenuToWindow = function() {
+        var $windowMenu;
+
+        $windowMenu = $('<div class="window-menu" />').insertAfter(this.el.windowTitleEl);
+
+        return {
+            windowMenuEl: $windowMenu
+        }
+    };
+
     // Function for creating the elements for the window.
     PWD.Window.prototype.createWindow = function() {
         var desktopEl, windowEl, windowTitleEl, windowTitleIcon,
