@@ -1,5 +1,8 @@
 (function ($) {
     "use strict";
+
+    var required = /\S/;
+
     PWD.RSS = function (url, updateTime) {
         var self = this;
 
@@ -156,6 +159,10 @@
 
                 // Get the value.
                 url = $('input').val();
+
+                if (!url.match(required)) {
+                    return;
+                };
 
                 // Remove the popup.
                 els.popupEl.remove();

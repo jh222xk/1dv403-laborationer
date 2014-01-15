@@ -1,8 +1,11 @@
 (function ($) {
     "use strict";
+
+    var required = /\S/;
+
     PWD.Messenger = function (updateTime) {
         var self = this;
-        var username;
+        var username, messageNum;
 
         this.setUsername = function(_username) {
             username = _username;
@@ -20,6 +23,15 @@
         this.getUpdateTime = function () {
             updateTime = updateTime = typeof updateTime !== 'undefined' ? updateTime : 10000;
             return updateTime;
+        }
+
+        this.getMessageNum = function () {
+            messageNum = messageNum = typeof messageNum !== 'undefined' ? messageNum : 10;
+            return messageNum;
+        }
+
+        this.setMessageNum = function (_messageNum) {
+            messageNum = _messageNum;
         }
 
         PWD.Window.call(this, "Messenger", "messenger-16", 600, 500);
@@ -43,7 +55,6 @@
         this.el.windowCloseLink.on('click', function(event) {
             self.removeCall(self.jqxhr, self.intervalID);
         });
-
     };
 
     // Inherit all the Window functions.
@@ -53,11 +64,13 @@
     PWD.Messenger.prototype.createMenuElements = function() {
         var ul, li, lie, settingsUl, archiveUl,
             $closeLink, $updateIntervalLink,
-            $serUsernameLink, $forceUpdateLink;
+            $setUsernameLink, $forceUpdateLink,
+            $setMessageNumLink;
 
         $closeLink = $('<li><a class="close" href="#">Stäng</a></li>');
         $updateIntervalLink = $('<li><a class="update-interval" href="#">Uppdateringsintervall</a></li>');
-        $serUsernameLink = $('<li><a class="set-username" href="#">Välj användarnamn</a></li>');
+        $setMessageNumLink = $('<li><a class="set-messageNum" href="#">Antal meddelanden</a></li>');
+        $setUsernameLink = $('<li><a class="set-username" href="#">Välj användarnamn</a></li>');
         $forceUpdateLink = $('<li><a class="force-update" href="#">Uppdatera nu</a></li>');
 
         ul = $('<ul class="top-level-ul"></ul>');
@@ -67,7 +80,8 @@
         lie = $('<li><a href="#">Inställningar</a></li>').appendTo(ul);
         settingsUl = $('<ul class="settings-ul"></ul>').appendTo(lie);
         $updateIntervalLink.appendTo(settingsUl);
-        $serUsernameLink.appendTo(settingsUl);
+        $setMessageNumLink.appendTo(settingsUl);
+        $setUsernameLink.appendTo(settingsUl);
         $forceUpdateLink.appendTo(settingsUl);
 
         this.menu.windowMenuEl.append(ul);
@@ -75,7 +89,8 @@
         return {
             closeLink: $closeLink,
             updateIntervalLink: $updateIntervalLink,
-            serUsernameLink: $serUsernameLink,
+            setMessageNumLink: $setMessageNumLink,
+            setUsernameLink: $setUsernameLink,
             forceUpdateLink: $forceUpdateLink
         }
     };
@@ -83,7 +98,7 @@
     PWD.Messenger.prototype.insertPopupData = function() {
         var self = this;
         var optionsArr, textArr, els, 
-            time, username,
+            time, username, messageNum,
             $optionEl, $selectEl, $inputEl, $h1;
 
         // On click on the force-update call the getMessages method.
@@ -140,8 +155,43 @@
             });
         });
 
+        // On click on the set-messageNum let the user input value in input.
+        this.menuEls.setMessageNumLink.on('click', function(event) {
+            event.preventDefault();
+
+            els = self.showPopup();
+
+            $inputEl = $('<input type="text" value="" /> <br /><br />');
+            $h1 = $('<h1>Antal meddelanden som ska visas</h1>');
+
+            $h1.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
+
+            $inputEl.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
+
+            // On click on the change button.
+            els.changeButton.on('click', function(event) {
+                event.preventDefault();
+
+                // Get the value.
+                messageNum = $('.popup-info input').val();
+
+                if (!messageNum.match(required)) {
+                    return;
+                };
+
+                // Remove the popup.
+                els.popupEl.remove();
+
+                // Change the messageNum.
+                self.setMessageNum(messageNum);
+
+                // And get the messages.
+                self.getMessages();
+            });
+        });
+
         // On click on the set-username let the user input value in input.
-        this.menuEls.serUsernameLink.on('click', function(event) {
+        this.menuEls.setUsernameLink.on('click', function(event) {
             event.preventDefault();
 
             els = self.showPopup();
@@ -159,6 +209,10 @@
 
                 // Get the value.
                 username = $('.popup-info input').val();
+
+                if (!username.match(required)) {
+                    return;
+                };
 
                 // Remove the popup.
                 els.popupEl.remove();
@@ -243,7 +297,7 @@
         var url, jqxhr, param;
 
         param = {
-            history: '2'
+            history: self.getMessageNum()
         }
         
         url = "http://homepage.lnu.se/staff/tstjo/labbyserver/getMessage.php";
@@ -304,9 +358,7 @@
 
     PWD.Messenger.prototype.sendMessage = function(text) {
         var self = this;
-        var url, jqxhr, param, errorEl, required;
-
-        required = /\S/;
+        var url, jqxhr, param, errorEl;
 
         console.log(text);
 
