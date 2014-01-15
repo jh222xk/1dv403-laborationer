@@ -1,6 +1,8 @@
 (function ($) {
     "use strict";
     PWD.ImageViewer = function (singleImage) {
+        var self = this;
+
         if (singleImage) {
             var img;
             img = $("<img src='"+singleImage.URL+"' />");
@@ -10,10 +12,15 @@
             this.setWindowContent(img);
         }
         else {
-            PWD.Window.call(this, "Image Viewer", "image-viewer-16");
-            this.fetchImages();
+            PWD.Window.call(this, "Image Viewer", "image-viewer-16", 210);
+            
+            this.jqxhr = this.fetchImages();
+
+            // If we close the window, abort the ajax call.
+            this.el.windowCloseLink.on('click', function(event) {
+                self.jqxhr.jqxhr.abort();
+            });
         }
-        
     };
 
     // Inherit all the Window functions.
@@ -33,11 +40,15 @@
             self.displayImage(data);
         }).fail(function() {
             // If fail, display that instead.
-            self.setWindowContent("Något gick fel!");
+            self.setWindowContent("Något gick fel när bilderna skulle hämtas. Vänligen försök igen lite senare.");
         }).always(function() {
             // Always remove the status.
             self.removeFooterStatus();
         });
+
+        return {
+            jqxhr: jqxhr
+        }
     };
 
     // Function for displaying our images in our window.
@@ -98,6 +109,8 @@
     };
 
     PWD.ImageViewer.prototype.openImage = function(image) {
+        // Noted bug, new windows wont come "on top".
+
         new PWD.ImageViewer(image);
     };
 
