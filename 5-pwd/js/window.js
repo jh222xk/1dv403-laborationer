@@ -22,9 +22,36 @@
 
         this.setWindowIndex();
 
+        this.el.windowTitleEl.css('cursor', 'move');
+        // On mousedown at the window title element to drag
+        // the window around the screen.
+        this.el.windowTitleEl.on('mousedown', function(event) {
+            event.preventDefault();
+
+            // Add the draggable class and set the opacity.
+            self.el.windowEl.addClass('draggable');
+            self.el.windowEl.css('opacity', '0.8');
+
+            // Call on the moveWindow function.
+            self.moveWindow();
+            
+            // Set the focus on the draggable window.
+            self.setWindowIndex();
+
+        // On mouseup...
+        }).on('mouseup', function(event) {
+            // ... Remove the draggable class.
+            self.el.windowEl.removeClass('draggable');
+            // Change back the opacity and cursor.
+            self.el.windowEl.css({
+                opacity: '1',
+                cursor: 'default'
+            });
+        });
+
+        // Click event on the WINDOW element to set the
+        // z-index (focus).
         this.el.windowEl.on('click', function(event) {
-            // Click event on the WINDOW element to set the
-            // z-index (focus).
             event.preventDefault();
             self.setWindowIndex();
         });
@@ -58,6 +85,25 @@
         this.el.windowRestoreEl.on('click', function(event) {
             event.preventDefault();
             self.restoreWindow();
+        });
+    };
+
+    // Function for move the window around the screen.
+    PWD.Window.prototype.moveWindow = function() {
+        var elHeight, elWidth, positionX, positionY;
+        var el = this.el.windowEl;
+
+        elHeight = el.outerHeight(),
+        elWidth = el.outerWidth(),
+        positionY = el.offset().top + elHeight - event.pageY,
+        positionX = el.offset().left + elWidth - event.pageX;
+
+        // On mousemove change the position of the window.
+        $('.desktop').on('mousemove', function(event) {
+            $('.draggable').offset({
+                top: event.pageY + positionY - elHeight,
+                left: event.pageX + positionX - elWidth
+            });
         });
     };
 
@@ -256,7 +302,6 @@
 
     // Function for setting the content of the window.
     PWD.Window.prototype.setWindowContent = function(data) {
-        //this.el.windowContentEl.html(data);
         this.el.windowContentEl.append(data);
     };
 
