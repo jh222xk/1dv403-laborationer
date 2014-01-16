@@ -131,7 +131,7 @@
         // Add values to the content of the window.
         this.el.windowContentEl.css({
             width: $desktop.width() - 16,
-            height: height - $startMenu.height() - this.el.windowTitleEl.height() - this.el.windowFooterEl.height() + 11
+            height: height - $startMenu.height() - this.el.windowTitleEl.height() - this.el.windowFooterEl.height() - this.menu.windowMenuEl.height() + 11
         });
 
         // Hide the maximize element.

@@ -21,7 +21,7 @@
         }
 
         this.getUpdateTime = function () {
-            updateTime = updateTime = typeof updateTime !== 'undefined' ? updateTime : 10000;
+            updateTime = updateTime = typeof updateTime !== 'undefined' ? updateTime : 10000 * 60;
             return updateTime;
         }
 
@@ -161,7 +161,7 @@
 
             els = self.showPopup();
 
-            $inputEl = $('<input type="text" value="" /> <br /><br />');
+            $inputEl = $("<input type='text' value='"+self.getMessageNum()+"' /> <br /><br />");
             $h1 = $('<h1>Antal meddelanden som ska visas</h1>');
 
             $h1.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
@@ -196,7 +196,7 @@
 
             els = self.showPopup();
 
-            $inputEl = $('<input type="text" value="" /> <br /><br />');
+            $inputEl = $("<input type='text' value='"+self.getUsername()+"' /> <br /><br />");
             $h1 = $('<h1>Välj användarnamn</h1>');
 
             $h1.appendTo(els.popupInfoEl).insertBefore(els.changeButton);
